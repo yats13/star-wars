@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Character list{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% for character in characters %}
+            <div class="item">
+                <div class="image">
+                    {% if(character.picture) %}
+                        <img src="{{ asset(pictures_dir ~ character.picture ) }}" alt="{{ character.name }}">
+                    {% endif %}
+                </div>
+                <div class="card">
+                    <a href="{{ path('app_character_edit', {'id': character.id}) }}">
+                        {{ character.name }}
+                    </a>
+                    <p>Mass: {{ character.mass }}</p>
+                    <p>Height: {{ character.height }}</p>
+                    <a href="{{ path('app_character_delete', {'id': character.id}) }}" class="danger">Delete</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <a href="{{ path('app_character_new') }}">Create new</a>
+{% endblock %}
